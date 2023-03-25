@@ -1,0 +1,35 @@
+#!/data/data/com.termux/files/usr/bin/bash
+url=$1
+echo "What should I do with $url ?"
+echo "v) download video with yt-dlp"
+echo "a) download video with yt-dlp and convert it to audio"
+echo "c) choose quality of video"
+echo "w) wget file to download-folder" 
+echo "x) nothing"
+
+read CHOICE
+case $CHOICE in
+	y)
+		yt-dlp --no-mtime --embed-metadata --embed-subs --embed-chapters -o "/sdcard/Termux/Video/%(title)s.%(ext)s" $url
+		;;
+	c)
+		echo "Quality : "
+		read q
+		yt-dlp -f "bv[height<=$q]+ba" --no-mtime --embed-metadata --embed-subs --embed-chapters -o "/sdcard/Termux/Video/%(title)s.%(ext)s" $url
+		;;
+	a)
+		echo "downloading audio..."
+		yt-dlp -x --no-mtime --embed-thumbnail --embed-metadata -o "/sdcard/Termux/Audio/%(title)s.%(ext)s" $url
+		;;
+	w)
+		cd ~/storage/downloads
+		wget $url
+		;;
+	py)
+		echo "downloading python video"
+		yt-dlp -f bv+ba --embed-metadata --embed-subs --embed-chapters -o "/sdcard/Termux/Python Tutorials/%(title)s.%(ext)s" $url
+		;;
+	x)
+		echo "bye"
+		;; 
+esac
