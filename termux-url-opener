@@ -9,7 +9,7 @@ echo "x) nothing"
 
 read CHOICE
 case $CHOICE in
-	y)
+	v)
 		yt-dlp --no-mtime --embed-metadata --embed-subs --embed-chapters -o "/sdcard/Termux/Video/%(title)s.%(ext)s" $url
 		;;
 	c)
@@ -24,10 +24,6 @@ case $CHOICE in
 	w)
 		cd ~/storage/downloads
 		wget $url
-		;;
-	py)
-		echo "downloading python video"
-		yt-dlp -f bv+ba --embed-metadata --embed-subs --embed-chapters -o "/sdcard/Termux/Python Tutorials/%(title)s.%(ext)s" $url
 		;;
 	x)
 		echo "bye"
