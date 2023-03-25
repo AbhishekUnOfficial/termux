@@ -10,11 +10,13 @@ echo "x) nothing"
 read CHOICE
 case $CHOICE in
 	v)
+                echo "downloading video at best quality..."
 		yt-dlp --no-mtime --embed-metadata --embed-subs --embed-chapters -o "/sdcard/Termux/Video/%(title)s.%(ext)s" $url
 		;;
 	c)
 		echo "Quality : "
 		read q
+                echo "downloading video at $q quality..."
 		yt-dlp -f "bv[height<=$q]+ba" --no-mtime --embed-metadata --embed-subs --embed-chapters -o "/sdcard/Termux/Video/%(title)s.%(ext)s" $url
 		;;
 	a)
