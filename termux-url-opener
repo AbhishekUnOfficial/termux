@@ -1,0 +1,47 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+#Adding colors
+R="$(printf '\033[1;31m')"
+G="$(printf '\033[1;32m')"
+Y="$(printf '\033[1;33m')"
+W="$(printf '\033[1;37m')"
+C="$(printf '\033[1;36m')"
+
+clear
+printf ${R}"This is best YouTube downloader bash script \n"
+url=$1
+echo ${Y}"What should I do with $url ?"
+echo ${G}"v) download video with yt-dlp"
+echo ${G}"a) download video with yt-dlp and convert it to audio"
+echo ${G}"c) choose quality of video"
+echo ${G}"w) download files to download folder" 
+echo ${G}"x) nothing"
+
+printf ${C}"Your input : "
+read CHOICE
+case $CHOICE in
+	v)
+                echo "downloading video at best quality..."
+		yt-dlp --no-mtime --embed-metadata --embed-subs --embed-chapters -o "/sdcard/Termux/Video/%(title)s.%(ext)s" $url
+		;;
+	c)
+		echo "Quality : "
+		read q
+                echo "downloading video under $q"p" quality..."
+		yt-dlp -f "bv[height<=$q]+ba" --no-mtime --embed-metadata --embed-subs --embed-chapters -o "/sdcard/Termux/Video/%(title)s.%(ext)s" $url
+		;;
+	a)
+		echo "downloading audio..."
+		yt-dlp -x --no-mtime --embed-thumbnail --embed-metadata -o "/sdcard/Termux/Audio/%(title)s.%(ext)s" $url
+		;;
+	w)
+		cd ~/storage/downloads
+		wget $url
+		;;
+	x)
+		echo "bye!"
+		;;
+	*)
+		echo "wrong input"
+		;;
+esac
