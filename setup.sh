@@ -7,5 +7,5 @@ pip3 install requests
 
 mkdir bin
 cd bin
-wget https://github.com/AbhishekUnOfficial/termux/raw/main/termux-url-opener
+wget https://raw.githubusercontent.com/AbhishekUnOfficial/termux/main/termux-url-opener
 chmod u+x termux-url-opener
